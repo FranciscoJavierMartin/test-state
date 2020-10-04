@@ -13,10 +13,10 @@ export default new Vuex.Store({
     myState: (state) => `${state.another}: ${state.top} - ${state.counter}`,
   },
   mutations: {
-    customMutation(state, payload = true) {
+    customMutation(state, payload) {
       state.another = 'Altered state';
       state.counter += 1;
-      if (payload) {
+      if (!payload || payload.updateTop) {
         state.top = true;
       }
     },
@@ -28,7 +28,7 @@ export default new Vuex.Store({
     },
     myActionWithParameter({ commit }) {
       console.log('Executed myActionWithParameter');
-      commit('customMutation', false);
+      commit('customMutation', { updateTop: false });
     },
   },
 });
