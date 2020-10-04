@@ -5,11 +5,30 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    top: false,
+    another: 'My state',
+    counter: 0,
+  },
+  getters: {
+    myState: (state) => `${state.another}: ${state.top} - ${state.counter}`,
   },
   mutations: {
+    customMutation(state, payload = true) {
+      state.another = 'Altered state';
+      state.counter += 1;
+      if (payload) {
+        state.top = true;
+      }
+    },
   },
   actions: {
-  },
-  modules: {
+    myAction({ commit }) {
+      console.log('Executed myAction');
+      commit('customMutation');
+    },
+    myActionWithParameter({ commit }) {
+      console.log('Executed myActionWithParameter');
+      commit('customMutation', false);
+    },
   },
 });

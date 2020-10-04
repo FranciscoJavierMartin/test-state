@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <strong>{{ this.myState }}</strong>
+    <div>
+      <button @click="this.myAction">Alone</button>
+      <button @click="this.myActionWithParameter">With param</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
+  computed: {
+    ...mapGetters(['myState']),
+  },
+  methods: {
+    ...mapActions(['myAction', 'myActionWithParameter']),
   },
 };
 </script>
